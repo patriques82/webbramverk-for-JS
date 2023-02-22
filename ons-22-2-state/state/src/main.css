@@ -1,0 +1,17 @@
+.on {
+  border: 2px solid black;
+}
+
+.off {
+  border: 1px solid black;
+}
+
+.container {
+  width: 300px;
+  margin: auto;
+}
+
+.digits {
+  width: 200px;
+  margin: auto;
+}
