@@ -2,12 +2,11 @@ import { useState } from 'react';
 import { sculptureList } from './data.js';
 
 // Hemläxa: Gör en miniräknare
-
 const App = () => {
   return (
     <div className="container">
-      <input type="text"></input>
-      <br />
+      <input className="input" type="text"></input>
+      <p className="output"></p>
       <div className="digits">
         <div>
           <button>1</button>
@@ -28,15 +27,13 @@ const App = () => {
           <button>0</button>
         </div>
       </div>
-      <br />
-      <div>
+      <div className="controls">
         <button>+</button>
         <button>-</button>
         <button>*</button>
         <button>/</button>
         <button>=</button>
       </div>
-      <div className="answer"></div>
     </div>
   )
 }

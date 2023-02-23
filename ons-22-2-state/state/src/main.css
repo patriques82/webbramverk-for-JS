@@ -7,11 +7,51 @@
 }
 
 .container {
-  width: 300px;
+  width: 100%;
   margin: auto;
+  text-align: center;
+}
+
+.input {
+  width: 240px;
+  height: 25px;
+  border-radius: 10px;
+  border: 0.75px solid;
+}
+
+.input:focus {
+  outline: none;
+}
+
+.output {
+  height: 20px;
+  font-size: 20px;
 }
 
 .digits {
-  width: 200px;
-  margin: auto;
+  margin: 0 auto;
+  margin-bottom: 13px;
+}
+
+.digits>div>button,
+.controls>button {
+  border: 1px solid rgb(10, 93, 79);
+  border-radius: 5px;
+  padding: 7px 16px;
+  margin: 1px;
+  background-color: rgb(24, 186, 159);
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  z-index: 10;
+  transition: all 0.8s cubic-bezier(0.075, 0.82, 0.165, 1) 0s;
+}
+
+.digits>div>button:hover,
+.controls>button:hover {
+  box-shadow: 0px 10px 25px rgba(4, 37, 100, 0.12);
+  border-radius: 4px;
+  z-index: 5;
+  transform: scale(1.35);
 }
