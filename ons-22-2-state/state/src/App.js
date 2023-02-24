@@ -1,38 +1,100 @@
 import { useState } from 'react';
 import { sculptureList } from './data.js';
 
+
 // Hemläxa: Gör en miniräknare
 const App = () => {
+  const [calculation, setCalculation] = useState({
+    firstNum: "",
+    operator: "",
+    secondNum: "",
+    output: "",
+  })
+
+  const digitClick = (number) => {
+    if (calculation.operator === "") {
+      const firstNum = calculation.firstNum + String(number)
+      setCalculation({ ...calculation, firstNum })
+    } else {
+      const secondNum = calculation.secondNum + String(number)
+      setCalculation({ ...calculation, secondNum })
+    }
+  }
+
+  const calculate = ({ firstNum, operator, secondNum }) => {
+    switch (operator) {
+      case '+':
+        return Number(firstNum) + Number(secondNum);
+      case '-':
+        return Number(firstNum) - Number(secondNum);
+      case '*':
+        return Number(firstNum) * Number(secondNum);
+      case '/':
+        return Number(firstNum) / Number(secondNum);
+    }
+  }
+
+  const controlClick = (control) => {
+    switch (control) {
+      case '+':
+        setCalculation({ ...calculation, operator: '+' })
+        break;
+      case '-':
+        setCalculation({ ...calculation, operator: '-' })
+        break;
+      case '*':
+        setCalculation({ ...calculation, operator: '*' })
+        break;
+      case '/':
+        setCalculation({ ...calculation, operator: '/' })
+        break;
+      default: // =
+        setCalculation({
+          firstNum: "",
+          operator: "",
+          secondNum: "",
+          output: calculate(calculation)
+        })
+        break;
+    }
+  }
+
+  const { firstNum, operator, secondNum, output } = calculation;
+
   return (
     <div className="container">
-      <input className="input" type="text"></input>
-      <p className="output"></p>
+      <input
+        readOnly
+        className="input"
+        value={firstNum + " " + operator + " " + secondNum}
+      />
+      <p className="output">{output}</p>
       <div className="digits">
         <div>
-          <button>1</button>
-          <button>2</button>
-          <button>3</button>
+          <button onClick={() => digitClick(1)}>1</button>
+          <button onClick={() => digitClick(2)}>2</button>
+          <button onClick={() => digitClick(3)}>3</button>
         </div>
         <div>
-          <button>4</button>
-          <button>5</button>
-          <button>6</button>
+          <button onClick={() => digitClick(4)}>4</button>
+          <button onClick={() => digitClick(5)}>5</button>
+          <button onClick={() => digitClick(6)}>6</button>
         </div>
         <div>
-          <button>7</button>
-          <button>8</button>
-          <button>9</button>
+          <button onClick={() => digitClick(7)}>7</button>
+          <button onClick={() => digitClick(8)}>8</button>
+          <button onClick={() => digitClick(9)}>9</button>
         </div>
         <div>
-          <button>0</button>
+          <button onClick={() => digitClick(0)}>0</button>
         </div>
       </div>
       <div className="controls">
-        <button>+</button>
-        <button>-</button>
-        <button>*</button>
-        <button>/</button>
-        <button>=</button>
+        <button onClick={() => controlClick('+')}>+</button>
+        <button onClick={() => controlClick('-')}>-</button>
+        <button onClick={() => controlClick('*')}>*</button>
+        <button onClick={() => controlClick('/')}>/</button>
+        <button onClick={() => controlClick('=')}>=</button>
       </div>
     </div>
   )
