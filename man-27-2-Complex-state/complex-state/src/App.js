@@ -1,11 +1,79 @@
 import { useState } from 'react'
 import "./main.css";
 
-const Home = ({ setActivePage, persons }) => {
+
+const Enter = ({ setActivePage }) => {
+  return (
+    <div className="enter">
+      <p>Welcome</p>
+      <button onClick={() => setActivePage("CODE")}>Code</button>
+    </div>
+  )
+}
+
+const Disallow = ({ setActivePage }) => {
+  return (
+    <div className="disallow">
+      <p>Sorry, only for guests</p>
+      <button onClick={() => setActivePage("CODE")}>Try again</button>
+    </div>
+  )
+}
+
+const Code = ({ code, codeHandler }) => {
+  return (
+    <div>
+      <button onClick={() => codeHandler(code + "1")}>1</button>
+      <button onClick={() => codeHandler(code + "2")}>2</button>
+      <button onClick={() => codeHandler(code + "3")}>3</button>
+      <button onClick={() => codeHandler(code + "4")}>4</button>
+    </div>
+  )
+}
+
+const App = () => {
+  const secretCode = "2341"
+  const [activePage, setActivePage] = useState("CODE")
+  const [code, setCode] = useState("")
+
+  const codeHandler = (currentCode) => {
+    if (currentCode.length > 3) {
+      if (currentCode === secretCode) {
+        setActivePage("ENTER")
+      } else {
+        setActivePage("DISALLOW")
+      }
+      setCode(""); // Blank för ny input
+    } else {
+      setCode(currentCode) // Uppdatera bara
+    }
+  }
+
+  if (activePage === "CODE") {
+    return <Code code={code} codeHandler={codeHandler} />
+  } else if (activePage === "ENTER") {
+    return <Enter setActivePage={setActivePage} />
+  } else {
+    return <Disallow setActivePage={setActivePage} />
+  }
+}
+
+/* Name display
+const Home = ({ setActivePage, persons, setUser }) => {
+
+  const clickHandler = (person) => {
+    setActivePage("USER");
+    setUser(person);
+  }
+
   return (
     <div>
       <ul>
-        {persons.map(person => <li>{person}</li>)}
+        {persons.map(person => (
+          <li>
+            <a href="#" onClick={() => clickHandler(person)}>{person}</a>
+          </li>
+        ))}
       </ul>
       <button onClick={() => setActivePage("EDIT")}>Edit</button>
     </div>
@@ -20,7 +88,7 @@ const Edit = ({ setActivePage, setPersons }) => {
 
   const saveHandler = () => {
     setActivePage("HOME");
-    setPersons(prev => [...prev, person])
+    setPersons(prev => [...prev, name])
   }
 
   return (
@@ -31,14 +99,33 @@ const Edit = ({ setActivePage, setPersons }) => {
   )
 }
 
+const User = ({ setActivePage, user }) => {
+  return (
+    <div>
+      <p>{user}</p>
+      <button onClick={() => setActivePage("HOME")}>Home</button>
+    </div>
+  )
+}
+
 const App = () => {
   const [persons, setPersons] = useState([]);
   const [activePage, setActivePage] = useState("HOME");
+  const [user, setUser] = useState("");
 
-  return activePage === "HOME" ?
-    <Home setActivePage={setActivePage} persons={persons} /> :
-    <Edit setActivePage={setActivePage} setPersons={setPersons} />
+  console.log("rerender")
+
+  switch (activePage) {
+    case "HOME":
+      return <Home setActivePage={setActivePage} setUser={setUser} persons={persons} />;
+    case "EDIT":
+      return <Edit setActivePage={setActivePage} setPersons={setPersons} />
+    default:
+      return <User setActivePage={setActivePage} user={user} />
+  }
+
 }
+*/
 
 /* Conditional rendering
 const NewBook = ({ newBook, setNewBook, setBooks }) => {
