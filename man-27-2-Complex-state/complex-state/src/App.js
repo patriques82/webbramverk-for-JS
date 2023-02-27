@@ -1,7 +1,17 @@
 import { useState } from 'react'
 import "./main.css";
 
+// Hemläxa till onsdag
 
+// 1. En App containaer
+// 2. En InputComponent för input (namn och ålder)
+//    Spara knapp (när knappen trycks ska det )
+// 3. En OutputComponent för visa namn och ålder
+
+// BONUS
+// 4. Visa lista av personer som ska visas med ålder och namn istället för bara en
+
+/* Toilet example */
 const Enter = ({ setActivePage }) => {
   return (
     <div className="enter">
@@ -31,6 +41,7 @@ const Code = ({ code, codeHandler }) => {
   )
 }
 
+// Container
 const App = () => {
   const secretCode = "2341"
   const [activePage, setActivePage] = useState("CODE")
