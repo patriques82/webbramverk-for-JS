@@ -1,7 +1,46 @@
 import { useState } from 'react'
 import "./main.css";
 
-// Conditional rendering
+const Home = ({ setActivePage, persons }) => {
+  return (
+    <div>
+      <ul>
+        {persons.map(person => <li>{person}</li>)}
+      </ul>
+      <button onClick={() => setActivePage("EDIT")}>Edit</button>
+    </div>
+  )
+}
+
+const Edit = ({ setActivePage, setPersons }) => {
+  const [name, setName] = useState("");
+  const nameHandler = (event) => {
+    setName(event.target.value)
+  }
+
+  const saveHandler = () => {
+    setActivePage("HOME");
+    setPersons(prev => [...prev, person])
+  }
+
+  return (
+    <div>
+      <input type="text" value={name} onChange={nameHandler}></input>
+      <button onClick={saveHandler}>Save</button>
+    </div>
+  )
+}
+
+const App = () => {
+  const [persons, setPersons] = useState([]);
+  const [activePage, setActivePage] = useState("HOME");
+
+  return activePage === "HOME" ?
+    <Home setActivePage={setActivePage} persons={persons} /> :
+    <Edit setActivePage={setActivePage} setPersons={setPersons} />
+}
+
+/* Conditional rendering
 const NewBook = ({ newBook, setNewBook, setBooks }) => {
   return (
     <div className="new-book">
@@ -45,6 +84,8 @@ const App = () => {
     </div>
   )
 }
+
+*/
 
 /* Repetition
 function App() {
