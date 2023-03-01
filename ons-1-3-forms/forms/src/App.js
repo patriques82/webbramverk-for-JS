@@ -1,10 +1,40 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import "./main.css";
-
 
 //https://images.dog.ceo/breeds/briard/n02105251_3407.jpg
 //https://images.dog.ceo/breeds/puggle/IMG_090821.jpg
 
+const App = () => {
+  return (
+    <div>
+      Hej
+    </div>
+  )
+}
+
+/* useEffect intro
+const UseEffectIntro = () => {
+  const [dogImg, setDogImg] = useState("")
+  const [trigger, setTrigger] = useState(0);
+
+  const fetchDog = async () => {
+    const resp = await fetch("https://dog.ceo/api/breeds/image/random");
+    const randomDog = await resp.json();
+    setDogImg(randomDog.message)
+  }
+
+  useEffect(() => {
+    fetchDog();
+  }, [trigger]);
+
+  return (
+    <div>
+      <img src={dogImg} />
+      <button onClick={() => setTrigger(trigger + 1)}>trigger</button>
+    </div>
+  )
+}
+*/
 
 
 /* Dogs example
