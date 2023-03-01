@@ -5,13 +5,44 @@ import "./main.css";
 
 // 1. En App containaer
 // 2. En InputComponent för input (namn och ålder)
-//    Spara knapp (när knappen trycks ska det )
+//    Spara knapp (när knappen trycks ska det sparas)
 // 3. En OutputComponent för visa namn och ålder
 
 // BONUS
 // 4. Visa lista av personer som ska visas med ålder och namn istället för bara en
 
-/* Toilet example */
+const InputComponent = ({ age, setAge, name, setName }) => {
+  return (
+    <div>
+      <input type="text" value={name} onChange={e => setName(e.target.value)}></input>
+      <input type="number" value={age} onChange={e => setAge(e.target.value)}></input>
+    </div>
+  )
+}
+
+const OutputComponent = ({ age, name }) => {
+  return (
+    <div>
+      <p>name: {name}</p>
+      <p>age: {age}</p>
+    </div>
+  )
+}
+
+const App = () => {
+  const [name, setName] = useState("")
+  const [age, setAge] = useState(0)
+  return (
+    <>
+      <InputComponent name={name} setName={setName} age={age} setAge={setAge} />
+      <OutputComponent name={name} age={age} />
+    </>
+  )
+}
+
+
+
+/* Toilet example
 const Enter = ({ setActivePage }) => {
   return (
     <div className="enter">
@@ -42,7 +73,7 @@ const Code = ({ code, codeHandler }) => {
 }
 
 // Container
-const App = () => {
+const Container = () => {
   const secretCode = "2341"
   const [activePage, setActivePage] = useState("CODE")
   const [code, setCode] = useState("")
@@ -68,6 +99,7 @@ const App = () => {
     return <Disallow setActivePage={setActivePage} />
   }
 }
+*/
 
 /* Name display
 const Home = ({ setActivePage, persons, setUser }) => {

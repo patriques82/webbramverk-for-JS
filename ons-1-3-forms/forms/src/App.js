@@ -1,7 +1,19 @@
 import React, { useState } from 'react';
 import "./main.css";
 
-const Dogs = ({ setView, dogs }) => {
+
+//https://images.dog.ceo/breeds/briard/n02105251_3407.jpg
+//https://images.dog.ceo/breeds/puggle/IMG_090821.jpg
+
+
+
+/* Dogs example
+const Dogs = ({ setView, dogs, setDog }) => {
+  const viewDog = (dog) => {
+    setDog(dog)
+    setView("DOG")
+  }
+
   return (
     <div>
       <h1>Dogs</h1>
@@ -9,7 +21,7 @@ const Dogs = ({ setView, dogs }) => {
         {dogs.map(dog =>
           <li>
             <img src={dog.img} />
-            <p>Name: {dog.name}</p>
+            <p>Name: <a href="#" onClick={() => viewDog(dog)}>{dog.name}</a></p>
             <p>Age: {dog.age} </p>
           </li>
         )}
@@ -43,17 +55,34 @@ const CreateDog = ({ setView, setDogs }) => {
   )
 }
 
+const Dog = ({ setView, dog }) => {
+  return (
+    <div>
+      <h1>View Dog</h1>
+      <img src={dog.img} />
+      <p>name: {dog.name}</p>
+      <p>age: {dog.age}</p>
+      <button onClick={() => setView("DOGS")}>Home</button>
+    </div>
+  )
+}
+
 const App = () => {
   const [view, setView] = useState("DOGS")
   const [dogs, setDogs] = useState([]);
+  const [dog, setDog] = useState({})
 
   switch (view) {
     case "DOGS":
-      return <Dogs setView={setView} dogs={dogs} />
+      return <Dogs setView={setView} dogs={dogs} setDog={setDog} />
+    case "DOG":
+      return <Dog setView={setView} dog={dog} />
     default:
       return <CreateDog setView={setView} setDogs={setDogs} />
   }
 }
+*/
+
 
 /* Form intro
 function FormEx() {
