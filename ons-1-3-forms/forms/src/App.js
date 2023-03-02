@@ -4,16 +4,66 @@ import "./main.css";
 //https://images.dog.ceo/breeds/briard/n02105251_3407.jpg
 //https://images.dog.ceo/breeds/puggle/IMG_090821.jpg
 
-const App = () => {
+// Läxa till fredag
+// 1. Gör post anrop istället för bara
+
+const Notes = ({ notes, setView }) => {
   return (
     <div>
-      Hej
+      <ul>
+        {notes.map(note =>
+          <li className={note.important ? "important" : ""}>
+            {note.content}
+          </li>
+        )}
+      </ul>
+      <button onClick={() => setView("CREATE_NOTE")}>Add Note</button>
     </div>
   )
 }
 
-/* useEffect intro
-const UseEffectIntro = () => {
+const CreateNote = ({ setNotes, setView }) => {
+  const submitHandler = async e => {
+    e.preventDefault()
+    const content = e.target.note.value // "buy milk"
+    const important = e.target.important.checked // true/false
+    // await här för att POSTa note till server istället 
+    setNotes(prev => [...prev, { content, important }]) // Ta bort denna!
+    setView("NOTES")
+  }
+  return (
+    <form onSubmit={submitHandler}>
+      <input id="note" type="text" placeholder="note"></input>
+      <input id="important" type="checkbox" placeholder="note"></input>
+      <button type="submit">Save</button>
+    </form>
+  )
+}
+
+const App = () => {
+  const [view, setView] = useState("NOTES");
+  const [notes, setNotes] = useState([])
+
+  useEffect(() => {
+    const fetchNotes = async () => {
+      const resp = await fetch("http://localhost:3001/notes");
+      const json = await resp.json();
+      setNotes(json);
+    }
+    fetchNotes();
+  }, [])
+
+  switch (view) {
+    case "NOTES":
+      return <Notes notes={notes} setView={setView} />
+    default:
+      return <CreateNote setNotes={setNotes} setView={setView} />
+  }
+}
+
+
+/*
+const App = () => {
   const [dogImg, setDogImg] = useState("")
   const [trigger, setTrigger] = useState(0);
 
@@ -24,8 +74,11 @@ const UseEffectIntro = () => {
   }
 
   useEffect(() => {
+    console.log("effect") // Visas i effect
     fetchDog();
   }, [trigger]);
+
+  console.log("render", dogImg) // Visas i render
 
   return (
     <div>
@@ -35,7 +88,6 @@ const UseEffectIntro = () => {
   )
 }
 */
-
 
 /* Dogs example
 const Dogs = ({ setView, dogs, setDog }) => {

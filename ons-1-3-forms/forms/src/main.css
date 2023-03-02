@@ -4,3 +4,7 @@ form {
   height: 60vh;
   width: 200px;
 }
+
+.important {
+  color: red;
+}
