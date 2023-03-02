@@ -51,7 +51,7 @@ const App = () => {
       setNotes(json);
     }
     fetchNotes();
-  }, [])
+  }, []) // Ta bort dependency array för att köra effekt efter varje render
 
   switch (view) {
     case "NOTES":
