@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import "./main.css";
 
-//https://images.dog.ceo/breeds/briard/n02105251_3407.jpg
-//https://images.dog.ceo/breeds/puggle/IMG_090821.jpg
-
 // Läxa till fredag
 // 1. Gör post anrop istället för bara
 
@@ -22,13 +19,22 @@ const Notes = ({ notes, setView }) => {
   )
 }
 
-const CreateNote = ({ setNotes, setView }) => {
+const CreateNote = ({ setView }) => {
   const submitHandler = async e => {
     e.preventDefault()
     const content = e.target.note.value // "buy milk"
     const important = e.target.important.checked // true/false
-    // await här för att POSTa note till server istället 
-    setNotes(prev => [...prev, { content, important }]) // Ta bort denna!
+    try {
+      await fetch("http://localhost:3001/notes", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ content, important })
+      })
+    } catch (error) {
+      console.error(error);
+    }
     setView("NOTES")
   }
   return (
@@ -40,6 +46,7 @@ const CreateNote = ({ setNotes, setView }) => {
   )
 }
 
+// Container
 const App = () => {
   const [view, setView] = useState("NOTES");
   const [notes, setNotes] = useState([])
@@ -51,13 +58,13 @@ const App = () => {
       setNotes(json);
     }
     fetchNotes();
-  }, []) // Ta bort dependency array för att köra effekt efter varje render
+  }) // Ta bort dependency array för att köra effekt efter varje render
 
   switch (view) {
     case "NOTES":
       return <Notes notes={notes} setView={setView} />
     default:
-      return <CreateNote setNotes={setNotes} setView={setView} />
+      return <CreateNote setView={setView} />
   }
 }
 

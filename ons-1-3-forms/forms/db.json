@@ -16,14 +16,9 @@
       "important": true
     },
     {
-      "content": "hejsan2",
-      "important": false,
-      "id": 4
-    },
-    {
-      "content": "en ny note",
+      "content": "test note",
       "important": true,
-      "id": 5
+      "id": 4
     }
   ]
 }
