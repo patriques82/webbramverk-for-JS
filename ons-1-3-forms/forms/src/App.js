@@ -19,7 +19,7 @@ const Notes = ({ notes, setView }) => {
   )
 }
 
-const CreateNote = ({ setView }) => {
+const CreateNote = ({ setNotes, setView }) => {
   const submitHandler = async e => {
     e.preventDefault()
     const content = e.target.note.value // "buy milk"
@@ -35,6 +35,7 @@ const CreateNote = ({ setView }) => {
     } catch (error) {
       console.error(error);
     }
+    setNotes(prev => [...prev, { content, important }])
     setView("NOTES")
   }
   return (
@@ -55,16 +56,16 @@ const App = () => {
     const fetchNotes = async () => {
       const resp = await fetch("http://localhost:3001/notes");
       const json = await resp.json();
-      setNotes(json);
+      setNotes(json); // Problem
     }
     fetchNotes();
-  }) // Ta bort dependency array för att köra effekt efter varje render
+  }, [])
 
   switch (view) {
     case "NOTES":
       return <Notes notes={notes} setView={setView} />
     default:
-      return <CreateNote setView={setView} />
+      return <CreateNote setNotes={setNotes} setView={setView} />
   }
 }
 

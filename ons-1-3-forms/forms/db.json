@@ -19,6 +19,21 @@
       "content": "test note",
       "important": true,
       "id": 4
+    },
+    {
+      "content": "hshshs",
+      "important": false,
+      "id": 5
+    },
+    {
+      "content": "buy hårvax",
+      "important": false,
+      "id": 6
+    },
+    {
+      "content": "hhshs",
+      "important": false,
+      "id": 7
     }
   ]
 }
