@@ -1,0 +1,29 @@
+{
+  "notes": [
+    {
+      "content": "hej",
+      "important": false,
+      "id": 1
+    },
+    {
+      "content": "hejdå",
+      "important": true,
+      "id": 2
+    },
+    {
+      "content": "hejdå",
+      "important": false,
+      "id": 4
+    },
+    {
+      "content": "",
+      "important": false,
+      "id": 5
+    },
+    {
+      "content": "",
+      "important": false,
+      "id": 6
+    }
+  ]
+}
