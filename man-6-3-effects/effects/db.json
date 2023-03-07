@@ -1,27 +1,22 @@
 {
   "notes": [
     {
-      "content": "hej",
-      "important": false,
+      "content": "hejdå",
+      "important": true,
       "id": 1
     },
     {
-      "content": "hejdå",
-      "important": true,
-      "id": 2
-    },
-    {
-      "content": "hejdå",
+      "content": "tripp",
       "important": false,
       "id": 4
     },
     {
-      "content": "",
+      "content": "tripptrapptrull",
       "important": false,
       "id": 5
     },
     {
-      "content": "",
+      "content": "tripptrapptrull",
       "important": false,
       "id": 6
     }

@@ -1,6 +1,64 @@
 import { useEffect, useState } from "react";
 import noteService from "./noteservice"
 
+const App = () => {
+  const [getTrigger, setGetTrigger] = useState({});
+  const [postTrigger, setPostTrigger] = useState({});
+  const [putTrigger, setPutTrigger] = useState({});
+  const [notes, setNotes] = useState([]);
+
+  useEffect(() => {
+    const fetchAllNotes = async () => {
+      const notes = await noteService.getAllNotes();
+      setNotes(notes);
+    }
+    fetchAllNotes();
+  }, [postTrigger, getTrigger, putTrigger])
+
+  useEffect(() => {
+    const postNewNote = async () => {
+      await noteService.createNote({ content: "tripptrapptrull", important: false })
+    }
+    postNewNote();
+  }, [postTrigger])
+
+  useEffect(() => {
+    const editNote = async () => {
+      await noteService.editNote(4, { content: "tripp", important: false })
+    }
+    editNote();
+  }, [putTrigger]);
+
+  return (
+    <div>
+      <button onClick={() => setGetTrigger({})}>GET</button>
+      <button onClick={() => setPostTrigger({})}>POST</button>
+      <button onClick={() => setPutTrigger({})}>PUT</button>
+      <ul>
+        {notes.map(note => <li>{note.content}</li>)}
+      </ul>
+    </div>
+  )
+}
+
+
+
+// Bonus input/paragraf toggle
+const EditInputToggle = () => {
+  const [edit, setEdit] = useState(false)
+  const [text, setText] = useState("");
+  return (
+    <Parent>
+      {edit ?
+        <input value={text} onChange={e => setText(e.target.value)}></input> :
+        <p>{text}</p>
+      }
+      <button onClick={() => setEdit(prev => !prev)}>Edit</button>
+    </Parent>
+  )
+}
+
+
 /*
 // Teori useEffect
 const App = ({ }) => {
@@ -35,25 +93,39 @@ const App = ({ }) => {
 }
 */
 
-
-// Notes
+/* Notes
 const Notes = ({ notes, setNotes, setView }) => {
+  const [editIds, setEditIds] = useState([]);
+
   const deleteHandler = async (id) => {
     try {
-      await fetch(`http://localhost:8000/notes/${id}`, {
-        method: "DELETE"
-      });
+      await noteService.deleteNote(id)
     } catch (error) {
       console.error(error);
     }
     setNotes(notes.filter(n => n.id !== id))
   }
+
+  const editHandler = async ({ id, ...note }) => {
+    if (!editIds.includes(note.id)) {
+      setEditIds(prev => [...prev, id]) // TODO: delete 
+    } else {
+      try {
+        await noteService.editNote(id, note)
+      } catch (error) {
+        console.error(error);
+      }
+    }
+  }
+
   return (
     <div>
       <ul>
         {notes.map(note =>
-          <li onClick={() => deleteHandler(note.id)} className={note.important ? "important" : ""}>
-            {note.content}
+          <li key={note.id} className={note.important ? "important" : ""}>
+            <input readOnly={!editIds.includes(note.id)} value={note.content} />
+            <button onClick={() => deleteHandler(note.id)}>Delete</button>
+            <button onClick={() => editHandler(note)}>{!editIds.includes(note.id) ? "Edit" : "Save"}</button>
           </li>
         )}
       </ul>
@@ -67,17 +139,13 @@ const CreateNote = ({ setNotes, setView }) => {
     e.preventDefault()
     const content = e.target.note.value // "buy milk"
     const important = e.target.important.checked // true/false
+    // add to server
     try {
-      await fetch("http://localhost:8000/notes", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ content, important })
-      })
+      await noteService.createNote({ content, important })
     } catch (error) {
       console.error(error);
     }
+    // add to state in react
     setNotes(prev => [...prev, { content, important }])
     setView("NOTES")
   }
@@ -97,9 +165,8 @@ const App = () => {
 
   useEffect(() => {
     const fetchNotes = async () => {
-      const resp = await fetch("http://localhost:8000/notes");
-      const json = await resp.json();
-      setNotes(json);
+      const notes = await noteService.getAllNotes();
+      setNotes(notes);
     }
     fetchNotes();
   }, [])
@@ -111,6 +178,6 @@ const App = () => {
       return <CreateNote setNotes={setNotes} setView={setView} />
   }
 }
-
+*/
 
 export default App;
