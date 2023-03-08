@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Note, Notes } from "./Note";
 
 /* props.children
 const Parent = (props) => {
@@ -16,6 +17,7 @@ const Child = () => {
 }
 */
 
+/*
 // Parent
 const Toggable = ({ children, hidden, shown }) => {
   const [visible, setVisible] = useState(false)
@@ -29,6 +31,7 @@ const Toggable = ({ children, hidden, shown }) => {
   )
 }
 
+// Child
 const Text = () => {
   return (
     <div>
@@ -54,5 +57,23 @@ function App() {
     </Toggable>
   );
 }
+*/
+
+const App = () => {
+  const note = {
+    content: "buy milk",
+    important: true
+  }
+  const toggleImportant = () => {
+    console.log("hej")
+  }
+
+  return (
+    <Notes>
+      <Note note={note} toggleImportant={toggleImportant} />
+    </Notes>
+  )
+}
+
 
 export default App;
