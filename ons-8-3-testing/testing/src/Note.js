@@ -4,7 +4,6 @@ const Note = ({ note, toggleImportant }) => {
     <li>
       {note.content}
       <button onClick={toggleImportant}>{label}</button>
-
     </li>
   )
 }

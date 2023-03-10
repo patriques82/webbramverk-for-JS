@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import noteService from "./noteservice"
 
+/*
 const App = () => {
   const [getTrigger, setGetTrigger] = useState({});
   const [postTrigger, setPostTrigger] = useState({});
@@ -40,9 +41,9 @@ const App = () => {
     </div>
   )
 }
+*/
 
-
-
+/*
 // Bonus input/paragraf toggle
 const EditInputToggle = () => {
   const [edit, setEdit] = useState(false)
@@ -57,7 +58,7 @@ const EditInputToggle = () => {
     </Parent>
   )
 }
-
+*/
 
 /*
 // Teori useEffect
@@ -93,7 +94,7 @@ const App = ({ }) => {
 }
 */
 
-/* Notes
+// Notes
 const Notes = ({ notes, setNotes, setView }) => {
   const [editIds, setEditIds] = useState([]);
 
@@ -178,6 +179,6 @@ const App = () => {
       return <CreateNote setNotes={setNotes} setView={setView} />
   }
 }
-*/
+
 
 export default App;
