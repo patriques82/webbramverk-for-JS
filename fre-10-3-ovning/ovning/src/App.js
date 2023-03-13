@@ -49,22 +49,32 @@ https://www.7timer.info/bin/astro.php?lon=11.9865&lat=57.696991&ac=0&unit=metric
 6: Läxa (lite tuffare): Test för att knapp trycks
 */
 
-const CloudCover = ({ data }) => {
-  return data.map(({ timepoint, cloudcover }) => (
-    <li key={timepoint}>
-      <p>Time: {timepoint}</p>
-      <p>CloudCover: {cloudcover}</p>
-    </li>
-  ))
+const CloudCover = ({ data, viewChange }) => {
+  return <Wrapper>
+    <button onClick={viewChange}>Transparency</button>
+    <ul>
+      {data.map(({ timepoint, cloudcover }) => (
+        <li key={timepoint}>
+          <p>Time: {timepoint}</p>
+          <p>CloudCover: {cloudcover}</p>
+        </li>
+      ))}
+    </ul>
+  </Wrapper>
 }
 
-const Transparency = ({ data }) => {
-  return data.map(({ timepoint, transparency }) => (
-    <li key={timepoint}>
-      <p>Time: {timepoint}</p>
-      <p>Transparency: {transparency}</p>
-    </li>
-  ))
+const Transparency = ({ data, viewChange }) => {
+  return <Wrapper>
+    <button onClick={viewChange}>Cloud cover</button>
+    <ul>
+      {data.map(({ timepoint, transparency }) => (
+        <li key={timepoint}>
+          <p>Time: {timepoint}</p>
+          <p>Transparency: {transparency}</p>
+        </li>
+      ))}
+    </ul>
+  </Wrapper>
 }
 
 const Wrapper = (props) => {
@@ -94,27 +104,11 @@ const App = () => {
 
   switch (view) {
     case "CLOUDCOVER":
-      return (
-        <Wrapper>
-          <button onClick={() => setView("TRANSPARENCY")}>Transparency</button>
-          <ul>
-            <CloudCover data={dataseries} />
-          </ul>
-        </Wrapper>
-      )
+      return <CloudCover data={dataseries} viewChange={() => setView("TRANSPARENCY")} />
     default: // TRANSPARENCY
-      return (
-        <Wrapper>
-          <button onClick={() => setView("CLOUDCOVER")}>Cloudcover</button>
-          <ul>
-            <Transparency data={dataseries} />
-          </ul>
-        </Wrapper>
-      )
+      return <Transparency data={dataseries} viewChange={() => setView("CLOUDCOVER")} />
   }
-
-
 }
 
-export { Wrapper };
+export { Wrapper, Transparency, CloudCover };
 export default App;

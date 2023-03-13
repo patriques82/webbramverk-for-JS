@@ -16,3 +16,4 @@ describe("<Wrapper /> suite", () => {
     expect(h1).toBeDefined();
   })
 })
+
