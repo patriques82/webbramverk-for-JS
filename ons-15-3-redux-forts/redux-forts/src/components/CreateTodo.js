@@ -1,19 +1,20 @@
 import { useDispatch } from "react-redux"
 import { createTodo } from "../reducers/todosReducer";
+import { goToListTodos } from "../reducers/viewReducer";
 
-const CreateTodo = ({ setView }) => {
+const CreateTodo = () => {
   const dispatch = useDispatch();
 
   const saveTodo = (event) => {
     event.preventDefault()
     const content = event.target.todo.value;
     dispatch(createTodo(content))
-    setView("LIST")
+    dispatch(goToListTodos())
   }
 
   return (
     <form onSubmit={saveTodo}>
-      <input id="todo" type="text"></input>
+      Todo: <input id="todo" type="text"></input>
       <br />
       <button type="submit">Save Todo</button>
     </form>
