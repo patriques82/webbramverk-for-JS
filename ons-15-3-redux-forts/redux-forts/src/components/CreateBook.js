@@ -2,7 +2,6 @@ import { useDispatch } from "react-redux";
 import { createBook } from "../reducers/booksReducer";
 import { goToListBooks } from "../reducers/viewReducer";
 
-
 const CreateBook = () => {
   const dispatch = useDispatch();
 
@@ -10,7 +9,7 @@ const CreateBook = () => {
     event.preventDefault()
     const name = event.target.name.value;
     const author = event.target.author.value;
-    dispatch(createBook(name, author))
+    dispatch(createBook({ name, author }))
     dispatch(goToListBooks())
   }
 
@@ -20,7 +19,7 @@ const CreateBook = () => {
       <br />
       Author: <input id="author" type="text"></input>
       <br />
-      <button type="submit">Save Todo</button>
+      <button type="submit">Save Book</button>
     </form>
   )
 }
