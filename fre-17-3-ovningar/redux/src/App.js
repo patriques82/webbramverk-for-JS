@@ -5,14 +5,14 @@ import ListTodos from "./components/ListTodos";
 import CreateBook from "./components/CreateBook";
 import ListBooks from "./components/ListBooks";
 
-const Debug = () => {
+const DebugWrapper = () => {
   const actions = useSelector(state => state.actions)
   return (
     <div className="border">
       <Content />
       <ul>
-        {actions.map(action => (
-          <li>action: {action.type}, payload: {JSON.stringify(action.payload)}</li>
+        {actions.map((action, idx) => (
+          <li key={idx}>action: {action.type}, payload: {JSON.stringify(action.payload)}</li>
         ))}
       </ul>
     </div>

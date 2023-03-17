@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux"
 import { goToCreateTodo, goToListBooks } from "../reducers/viewReducer";
+import { deleteTodo, toggleImportance } from "../reducers/todosReducer";
 
 const ListTodos = () => {
   const todos = useSelector(state => state.todos);
@@ -24,7 +25,10 @@ const ListTodos = () => {
         {filteredTodos.map(({ id, content, important }) => (
           <li className={important ? "important" : ""} key={id}>
             {content}
-            {" "}<button>x</button>
+            {" "}
+            <button onClick={() => dispatch(deleteTodo(id))}>x</button>
+            {" "}
+            important: <input type="checkbox" onClick={() => dispatch(toggleImportance(id))} />
           </li>
         ))}
       </ul>

@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { Provider } from "react-redux";
 import { combineReducers } from "redux";
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, createSlice } from '@reduxjs/toolkit';
 import reduxLogger from "redux-logger";
 import { devToolsEnhancer } from "redux-devtools-extension"
 
