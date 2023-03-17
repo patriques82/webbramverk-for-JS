@@ -15,7 +15,7 @@ const booksReducer = (state = [], action) => {
 
 // 2. Skapa en action creator "createBook" som skapar ADD_BOOK action
 export const createBook = (name, author) => {
-  return { type: "ADD_BOOK", payload: { id: uniqid(), name, author } }
+  return { type: "CREATE_BOOK", payload: { id: uniqid(), name, author } }
 }
 
 // export default booksReducer;
