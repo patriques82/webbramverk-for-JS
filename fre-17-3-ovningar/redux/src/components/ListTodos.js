@@ -24,6 +24,7 @@ const ListTodos = () => {
         {filteredTodos.map(({ id, content, important }) => (
           <li className={important ? "important" : ""} key={id}>
             {content}
+            {" "}<button>x</button>
           </li>
         ))}
       </ul>

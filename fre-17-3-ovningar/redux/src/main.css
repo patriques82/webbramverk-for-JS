@@ -1,3 +1,7 @@
 .important {
   color: red;
 }
+
+.border {
+  border: solid 1px black;
+}

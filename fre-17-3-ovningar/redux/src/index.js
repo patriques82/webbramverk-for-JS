@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { Provider, useDispatch, useSelector } from "react-redux";
+import { Provider } from "react-redux";
 import { combineReducers } from "redux";
 import { configureStore } from '@reduxjs/toolkit';
 import reduxLogger from "redux-logger";
@@ -8,10 +8,10 @@ import { devToolsEnhancer } from "redux-devtools-extension"
 
 import "./main.css";
 import App from './App';
-import todosReducer, { createTodo } from "./reducers/todosReducer";
+import todosReducer from "./reducers/todosReducer";
 import viewReducer from './reducers/viewReducer';
 import booksReducer from "./reducers/booksReducer";
-
+import actionsReducer from "./reducers/actionsReducer";
 
 // const rootReducer = combineReducers({
 //   todos: todosReducer,
@@ -24,7 +24,8 @@ const store = configureStore({
   reducer: {
     todos: todosReducer,
     view: viewReducer,
-    books: booksReducer
+    books: booksReducer,
+    actions: actionsReducer
   }
   //middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(reduxLogger),
 })
