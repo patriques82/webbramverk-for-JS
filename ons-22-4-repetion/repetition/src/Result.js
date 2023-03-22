@@ -1,6 +1,19 @@
+import { useSelector } from 'react-redux';
+import { Link } from "react-router-dom"
+
 const Result = () => {
+  const pokemons = useSelector(state => state);
+
   return (
-    <div>Result</div>
+    <ul>
+      {pokemons.map(pokemon => (
+        <li>
+          <Link to={`/pokemon/${pokemon.name}`}>
+            {pokemon.name}
+          </Link>
+        </li>
+      ))}
+    </ul>
   )
 }
 
