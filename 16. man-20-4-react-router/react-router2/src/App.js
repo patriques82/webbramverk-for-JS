@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
-  Routes, Route, Link
+  Routes, Route, Link,
+  useParams,
+  useNavigate
 } from "react-router-dom";
 
 const Home = () => {
@@ -21,6 +23,35 @@ const Friends = () => {
   )
 }
 
+const Books = ({ books }) => {
+  return (
+    <>
+      <h1>Books</h1>
+      <ul>
+        {books.map(book => <li>{book.name}</li>)}
+      </ul>
+    </>
+  )
+}
+
+const Book = ({ books }) => {
+  const id = Number(useParams().id);
+  const book = books.find(book => book.id === id)
+  if (book === undefined) {
+    return (
+      <div>Sorry, no book with id {id}</div>
+    )
+  } else {
+    return (
+      <>
+        <h1>Book</h1>
+        <p>Id: {book.id}</p>
+        <p>Name: {book.name}</p>
+      </>
+    )
+  }
+}
+
 const Navbar = () => {
   return (
     <div>
@@ -29,11 +60,19 @@ const Navbar = () => {
       <Link to="/profile">Profile</Link>
       {" "}
       <Link to="/friends">Friends</Link>
+      {" "}
+      <Link to="/books">Books</Link>
     </div>
   )
 }
 
 const App = () => {
+  const books = [
+    { id: 1, name: "pippi" },
+    { id: 2, name: "emil" },
+    { id: 3, name: "bullerbyn" },
+    { id: 4, name: "tjorven" },
+  ]
   return (
     <div>
       <Navbar />
@@ -41,6 +80,8 @@ const App = () => {
         <Route path="/" element={<Home />} />
         <Route path="/profile" element={<Profile />} />
         <Route path="/friends" element={<Friends />} />
+        <Route path="/books" element={<Books books={books} />} />
+        <Route path="/books/:id" element={<Book books={books} />} />
       </Routes>
     </div>
   )
