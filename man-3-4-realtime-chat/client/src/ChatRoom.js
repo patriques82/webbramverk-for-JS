@@ -13,7 +13,7 @@ const ChatRoom = () => {
 
       <div className="messages-container">
         <ol className="messages-list">
-          {messages.map((message, i) => {
+          {messages.map((message, i) => (
             <li
               key={i}
               className={`message-item ${message.ownedByCurrentUser ? "my-message" : "received-message"
@@ -21,7 +21,7 @@ const ChatRoom = () => {
             >
               {message.senderId}: {message.body}
             </li>
-          })}
+          ))}
         </ol>
       </div>
 
